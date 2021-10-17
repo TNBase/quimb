@@ -218,7 +218,7 @@ def _get_contraction(eq, shapes, optimize, cache, get, **kwargs):
         return info
 
 
-def get_contraction(eq, *shapes, cache=True, get='expr',
+def get_contraction(eq, *shapes, cache=True, get='expr', default=1,
                     optimize=None, **kwargs):
     """Get an callable expression that will evaluate ``eq`` based on
     ``shapes``. Cache the result if no constant tensors are involved.
@@ -237,7 +237,7 @@ def get_contraction(eq, *shapes, cache=True, get='expr',
         isinstance(shapes[0], tuple) and
         isinstance(next(concat(shapes), 1), int)
     ):
-        shapes = tuple(tuple(map(int, s)) for s in shapes)
+        shapes = tuple(tuple(map(lambda x: int(x) if x is not None else default, s)) for s in shapes)
 
     # make sure explicit paths are hashable
     if isinstance(optimize, list):
