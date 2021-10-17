@@ -218,7 +218,7 @@ def _get_contraction(eq, shapes, optimize, cache, get, **kwargs):
         return info
 
 
-def get_contraction(eq, *shapes, cache=True, get='expr', default=1,
+def get_contraction(eq, *shapes, cache=True, get='expr', default=32,
                     optimize=None, **kwargs):
     """Get an callable expression that will evaluate ``eq`` based on
     ``shapes``. Cache the result if no constant tensors are involved.
